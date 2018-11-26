@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
 import javax.swing.border.TitledBorder;
 
+import database_setting_application.service.ImportService;
 import database_setting_application.service.InitService;
 
 import javax.swing.JButton;
@@ -24,11 +25,16 @@ public class SettingUi extends JFrame implements ActionListener {
 	private JPanel contentPane;
 	private JButton btnInit;
 	private InitService initService;
+	private ImportService importService;
+	private JButton btnImport;
+	private JButton btnExport;
+	
 	/**
 	 * Create the frame.
 	 */
 	public SettingUi() {
 		initService = new InitService();
+		importService = new ImportService();
 		initComponents();
 	}
 	private void initComponents() {
@@ -50,14 +56,19 @@ public class SettingUi extends JFrame implements ActionListener {
 		btnInit.addActionListener(this);
 		btnPannel.add(btnInit);
 		
-		JButton btnImport = new JButton("백업");
+		btnImport = new JButton("백업");
+		btnImport.addActionListener(this);
 		btnPannel.add(btnImport);
 		
-		JButton btnExport = new JButton("복원");
+		btnExport = new JButton("복원");
+		btnExport.addActionListener(this);
 		btnPannel.add(btnExport);
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnExport) {
+			do_btnExport_actionPerformed(e);
+		}
 		if (e.getSource() == btnInit) {
 			do_btnInit_actionPerformed(e);
 		}
@@ -90,4 +101,15 @@ public class SettingUi extends JFrame implements ActionListener {
 		}
 		return chooser.getSelectedFile().getPath();
 	}
+
+	//복원
+	protected void do_btnExport_actionPerformed(ActionEvent e) {
+		try {
+			importService.service(filePath("DataFiles 디렉터리 선택", true));
+			JOptionPane.showMessageDialog(null, e.getActionCommand() + " 완료");
+		} catch (Exception e1) {
+			JOptionPane.showMessageDialog(null, "파일을 선택하지 않았습니다.", "경고", JOptionPane.WARNING_MESSAGE);
+		}
+	}
+	
 }

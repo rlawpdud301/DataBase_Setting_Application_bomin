@@ -4,6 +4,9 @@ DROP SCHEMA IF EXISTS coffee2;
 -- 내 스키마
 CREATE SCHEMA coffee2;
 
+-- db 선택
+use coffee2;
+
 -- 제품
 CREATE TABLE coffee2.product (
 	code CHAR(4)     NOT NULL COMMENT '코드', -- 코드

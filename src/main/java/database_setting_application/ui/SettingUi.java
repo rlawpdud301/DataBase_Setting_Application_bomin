@@ -56,18 +56,22 @@ public class SettingUi extends JFrame implements ActionListener{
 		btnPannel.setLayout(new GridLayout(1, 0, 10, 0));
 		
 		btnInit = new JButton("초기화");
+		btnInit.addActionListener(this);
 		btnPannel.add(btnInit);
 		
-		btnExport = new JButton("백업");
+		/*btnExport = new JButton("백업");
 		btnExport.addActionListener(this);
 		btnPannel.add(btnExport);
 		
 		btnImport = new JButton("복원");
 		btnImport.addActionListener(this);
-		btnPannel.add(btnImport);
+		btnPannel.add(btnImport);*/
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnInit) {
+			do_btnInit_actionPerformed(e);
+		}
 		if (e.getSource() == btnExport) {
 			do_btnExport_actionPerformed(e);
 		}
